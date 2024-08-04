@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Athlete, Coach, Manager
+from .models import Athlete, Coach, Manager, School
 
 @admin.register(Athlete)
 class AthleteAdmin(admin.ModelAdmin):
@@ -18,3 +18,8 @@ class CoachAdmin(admin.ModelAdmin):
 class ManagerAdmin(admin.ModelAdmin):
     list_display = ('email', 'first_name', 'last_name')
     search_fields = ('email', 'first_name', 'last_name')
+
+@admin.register(School)
+class SchoolAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+    search_fields = ('name', )
