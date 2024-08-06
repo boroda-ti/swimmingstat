@@ -31,7 +31,7 @@ class AbstractUser(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['email', 'first_name', 'last_name', 'date_of_birth']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'date_of_birth']
 
     class Meta:
         abstract = True
@@ -54,14 +54,13 @@ RANK_CHOICES = [
 class Athlete(AbstractUser):
 
     rank = models.CharField(max_length=5, choices=RANK_CHOICES, null=True, blank=True)
-    #results = 
     coach = models.ForeignKey('Coach', on_delete=models.SET_NULL, null=True, blank=True)
-    school = models.OneToOneField('School', on_delete=models.SET_NULL, null=True, blank=True)
+    #school = models.ForeignKey('School', on_delete=models.SET_NULL, null=True, blank=True)
 
 class Coach(AbstractUser):
 
     rank = models.CharField(max_length=5, choices=RANK_CHOICES, null=True, blank=True)
-    school = models.OneToOneField('School', on_delete=models.SET_NULL, null=True, blank=True)
+    school = models.ForeignKey('School', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'

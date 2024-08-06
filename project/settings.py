@@ -34,9 +34,11 @@ INSTALLED_APPS = [
     #modules
     'django_filters',
     'rest_framework',
+    'rest_framework.authtoken',
 
     #apps
     'user_app',
+    'stats_app',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +127,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Auth
+AUTH_USER_MODEL = 'user_app.Coach'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
