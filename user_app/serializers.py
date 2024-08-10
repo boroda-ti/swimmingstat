@@ -2,14 +2,11 @@ from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
 
 from rest_framework import serializers
-from rest_framework.exceptions import AuthenticationFailed
 
-from .models import Coach
+from .models import CustomUser
 
-class CoachSerializer(serializers.ModelSerializer):
+class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Coach
-        fields = ('email', 'password')
-
-    password = serializers.CharField(write_only=True)
+        model = CustomUser
+        fields = '__all__'

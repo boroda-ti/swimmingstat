@@ -1,25 +1,9 @@
 from django.contrib import admin
 
-from .models import Athlete, Coach, Manager, School
+from .models import CustomUser
 
-@admin.register(Athlete)
-class AthleteAdmin(admin.ModelAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'rank', 'coach')
-    search_fields = ('email', 'first_name', 'last_name')
-    list_filter = ('rank', )
-
-@admin.register(Coach)
-class CoachAdmin(admin.ModelAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'rank')
-    search_fields = ('email', 'first_name', 'last_name')
-    list_filter = ('rank', )
-
-@admin.register(Manager)
-class ManagerAdmin(admin.ModelAdmin):
+@admin.register(CustomUser)
+class CustomUserAdmin(admin.ModelAdmin):
     list_display = ('email', 'first_name', 'last_name')
     search_fields = ('email', 'first_name', 'last_name')
-
-@admin.register(School)
-class SchoolAdmin(admin.ModelAdmin):
-    list_display = ('name', )
-    search_fields = ('name', )
+    list_filter = ('first_name', 'last_name', )

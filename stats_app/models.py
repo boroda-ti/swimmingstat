@@ -1,6 +1,16 @@
 from django.db import models
 
-from user_app.models import Athlete
+RANK_CHOICES = [
+        ('3Y', '3 юнацький'),
+        ('2Y', '2 юнацький'),
+        ('1Y', '1 юнацький'),
+        ('3A', '3 дорослий'),
+        ('2A', '2 дорослий'),
+        ('1A', '1 дорослий'),
+        ('CMS', 'КМС'),
+        ('MS', 'МС'),
+        ('MSMK', 'МСМК'),
+    ]
 
 STYLES_CHOICES = [
     ('fr', 'Вільний стиль'),
@@ -28,6 +38,23 @@ DISTANCE_CHOICES = [
     ('7.5k', '7,5 кілометрів'),
     ('10k', '10 кілометрів'),
 ]
+
+class Athlete(models.Model):
+
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    date_of_birth = models.DateField()
+
+    rank = models.CharField(max_length=5, choices=RANK_CHOICES, null=True, blank=True)
+    coach = models.ForeignKey('user_app.CustomUser', limit_choices_to={"is_coach": True}, on_delete=models.SET_NULL, null=True, blank=True)
+
+
+class School(models.Model):
+
+    name = models.CharField(max_length=255, default=None, null=True, blank=True)
+
+    def __str__(self) -> str:
+        return self.name
 
 class Competitions(models.Model):
 
