@@ -32,9 +32,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #modules
-    'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_filters',
 
     #apps
     'user_app',
@@ -135,5 +135,8 @@ AUTH_USER_MODEL = 'user_app.CustomUser'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ]
+        'rest_framework.authentication.SessionAuthentication',
+    ], 'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
 }

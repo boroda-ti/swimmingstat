@@ -160,7 +160,20 @@ class UserDetailUpdateAPITestCase(APITestCase):
         self.assertEqual(response.data['email'], self.coach1.email)
 
     def test_anonymous_user_cannot_update_profile(self):
-        response = self.client.patch(self.url, {
+        updated_data = {
+        'email': 'coach1_updated@example.com',
+        'first_name': 'UpdatedFirstName',
+        'last_name': 'UpdatedLastName',
+        'initial_name': 'UpdatedInitialName',
+        'date_of_birth': '2000-01-01',
+        'school': None,
+        }
+
+        response = self.client.put(self.url, updated_data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        response = self.client.put(self.url, {
             'email': 'coach1_updated3@example.com',
         })
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
