@@ -85,46 +85,6 @@ class UserDetailUpdateAPITestCase(APITestCase):
 
         self.url = reverse('user-detail-update', kwargs={'pk': self.coach1.pk})
 
-    # def test_owner_can_retrieve_own_profile(self):
-    #     self.client.login(email='coach1@example.com', password='password123')
-    #     response = self.client.get(self.url)
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
-    #     self.assertEqual(response.data['email'], self.coach1.email)
-
-    # def test_owner_can_update_own_profile(self):
-    #     self.client.login(email='coach1@example.com', password='password123')
-    #     response = self.client.patch(self.url, {
-    #         'email': 'coach1_updated@example.com',
-    #     })
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
-    #     self.assertEqual(response.data['email'], 'coach1_updated@example.com')
-
-    # def test_other_user_cannot_update_owner_profile(self):
-    #     self.client.login(email='coach2@example.com', password='password123')
-    #     response = self.client.patch(self.url, {
-    #         'email': 'coach1_updated@example.com',
-    #     })
-    #     self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
-    # def test_staff_user_can_update_any_profile(self):
-    #     self.client.login(email='staff@example.com', password='password123')
-    #     response = self.client.patch(self.url, {
-    #         'email': 'coach1_updated2@example.com',
-    #     })
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
-    #     self.assertEqual(response.data['email'], 'coach1_updated2@example.com')
-
-    # def test_anonymous_user_can_retrieve_profile(self):
-    #     response = self.client.get(self.url)
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
-    #     self.assertEqual(response.data['email'], self.coach1.email)
-
-    # def test_anonymous_user_cannot_update_profile(self):
-    #     response = self.client.patch(self.url, {
-    #         'email': 'coach1_updated3@example.com',
-    #     })
-    #     self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
     def test_owner_can_retrieve_own_profile(self):
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.coach1_token.key)
         response = self.client.get(self.url)

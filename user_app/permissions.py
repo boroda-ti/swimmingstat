@@ -22,3 +22,14 @@ class IsOwnerOrStaff(permissions.BasePermission):
             return True
 
         return request.user and request.user.is_authenticated and (obj.pk == request.user.pk or request.user.is_staff)
+    
+class IsCoachOrStaff(permissions.BasePermission):
+    """
+    Custom permission to only allow coach or staff members to edit it.
+    """
+
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        
+        return request.user and request.user.is_authenticated and (request.user.is_coach or request.user.is_staff)
